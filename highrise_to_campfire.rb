@@ -1,9 +1,6 @@
 require 'rubygems'
-require 'ruby-debug'
-require 'tinder'
-require 'sequel'
-require 'rfeedparser'
-require 'open-uri'
+require 'bundler'
+Bundler.require
 
 module HighriseToCampfire
   NOTIFY_ON_NEW_ITEMS = true
@@ -15,10 +12,9 @@ module HighriseToCampfire
   end
 
   def self.highrise_feed 
-    @@feed ||= FeedParser.parse(
-         open(
+    @@feed ||= Feedzirra::Feed.fetch_and_parse(
            "https://#{config['highrise']['subdomain']}.highrisehq.com/recordings.atom",
-           :http_basic_authentication => [config['highrise']['token'], 'x']))
+           :http_authentication => [config['highrise']['token'], 'x'])
   end
   
   def self.campfire_room
