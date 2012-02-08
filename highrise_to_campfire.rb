@@ -45,9 +45,8 @@ module HighriseToCampfire
   
   def self.notify(entry)
     bot = campfire_room
-    
-    bot.speak "#{entry.author_detail.name} did something: #{entry.title}"
-    bot.speak "Read more about it here: #{entry.link}"
+    bot.speak "#{entry.author} did something: #{entry.title}"
+    bot.speak "Read more about it here: #{entry.url}"
   end
 
   def self.run
