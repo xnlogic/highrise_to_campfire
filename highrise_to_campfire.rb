@@ -52,7 +52,7 @@ module HighriseToCampfire
   def self.run
     return if highrise_feed.entries.empty?
     highrise_feed.entries.to_a.each do |entry|
-      if Time.parse(entry.updated) > last_updated_at
+      if entry.updated > last_updated_at
         notify(entry) if NOTIFY_ON_NEW_ITEMS
       end
     end
