@@ -18,9 +18,10 @@ module HighriseToCampfire
   end
   
   def self.campfire_room
-    bot = Tinder::Campfire.new(config['campfire']['subdomain'])
+    bot = Tinder::Campfire.new(config['campfire']['subdomain'],
+                              :ssl => true,
+                              :token => config['campfire']['token'])
 
-    bot.login(config['campfire']['login'],config['campfire']['password'])
     room = bot.find_room_by_name(config['campfire']['room_name'])
     room
   end

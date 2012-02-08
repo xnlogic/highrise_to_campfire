@@ -2,11 +2,9 @@ global:
 
 campfire:
   subdomain: 'example'
-  login: 'you@example.com'
-  password: 'secret'
-  default_room: 1234
-  # False on the free version, true on the pay versions
-  ssl: false  
+  token: 'you@example.com'
+  room_name: 1234
+  ssl: true  
 
 highrise:
  subdomain: 'example'
