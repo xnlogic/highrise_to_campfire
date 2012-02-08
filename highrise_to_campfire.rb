@@ -29,7 +29,7 @@ module HighriseToCampfire
   def self.last_updated_at
     @@last_updated_at ||= begin
       str = File.read(LAST_UPDATED_AT_FILE) rescue nil
-      (str.blank? ? nil : Time.parse(str))
+      (str.blank? ? Time.now : Time.parse(str))
     end
   end
 
