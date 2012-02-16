@@ -50,7 +50,7 @@ module HighriseToCampfire
   end
 
   def self.run
-    return if highrise_feed.entries.empty?
+    return if highrise_feed.is_a? Fixnum or highrise_feed.entries.empty?
     highrise_feed.entries.to_a.each do |entry|
       if entry.updated > last_updated_at
         notify(entry) if NOTIFY_ON_NEW_ITEMS
