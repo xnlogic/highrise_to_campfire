@@ -11,12 +11,12 @@ module HighriseToCampfire
     @@config ||= YAML.load(File.read(CONFIG_FILE))
   end
 
-  def self.highrise_feed 
+  def self.highrise_feed
     @@feed ||= Feedzirra::Feed.fetch_and_parse(
            "https://#{config['highrise']['subdomain']}.highrisehq.com/recordings.atom",
            :http_authentication => [config['highrise']['token'], 'x'])
   end
-  
+
   def self.campfire_room
     bot = Tinder::Campfire.new(config['campfire']['subdomain'],
                               :ssl => true,
@@ -42,11 +42,15 @@ module HighriseToCampfire
   rescue
     false
   end
-  
+
   def self.notify(entry)
     bot = campfire_room
-    bot.speak "#{entry.author} did something: #{entry.title}"
-    bot.speak "Read more about it here: #{entry.url}"
+    bot.speak "#{entry.author} did something: #{entry.title} "
+    bot.speak <<-TEXT
+    Here's the crux of it:\r\n
+    #{ Nokogiri::HTML( HTMLEntities.new.decode(entry.content) ).text[0,160] }...
+    (read more: #{entry.url})
+    TEXT
   end
 
   def self.run

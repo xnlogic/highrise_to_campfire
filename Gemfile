@@ -7,4 +7,5 @@ source "http://rubygems.org"
 
 gem 'tinder'
 gem 'feedzirra'
+gem 'htmlentities'
 
