@@ -47,7 +47,7 @@ module HighriseToCampfire
     bot = campfire_room
     bot.speak "#{entry.author} did something: #{entry.title} "
     bot.speak <<-TEXT
-    Here's the crux of it:\r\n
+    ->\n
     #{ Nokogiri::HTML( HTMLEntities.new.decode(entry.content) ).text[0,160] }...
     (read more: #{entry.url})
     TEXT
